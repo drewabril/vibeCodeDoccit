@@ -30,52 +30,7 @@ The creator of a subreddit is designated as its Owner, with full control over th
 
 ### Prerequisites
 
-- Node.js
-- npm or yarn
-
-### Installation
-
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   ```
-
-2. Navigate to the client directory and install dependencies:
-   ```
-   cd client
-   npm install
-   ```
-
-3. Navigate to the server directory and install dependencies:
-   ```
-   cd ../server
-   npm install
-   ```
-
-### Running the Application
-
-1. Start the server:
-   ```
-   cd server
-   npm start
-   ```
-
-2. Start the client:
-   ```
-   cd ../client
-   npm start
-   ```
-
-The application should now be running on `http://localhost:3000`.
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
+- Docker
 ## Docker (Recommended)
 
 ### Simplified server-rendered UI (no React)
