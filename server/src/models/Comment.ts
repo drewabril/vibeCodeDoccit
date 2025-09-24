@@ -26,7 +26,7 @@ const commentSchema = new Schema({
 });
 
 commentSchema.pre('save', function(next) {
-    this.updatedAt = Date.now();
+    (this as any).updatedAt = new Date();
     next();
 });
 

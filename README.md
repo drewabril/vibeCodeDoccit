@@ -75,3 +75,28 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Docker (Recommended)
+
+### Simplified server-rendered UI (no React)
+
+This project now includes a minimal EJS-based UI served by Express. No React build is needed.
+
+Run everything with Docker:
+```bash
+cd vibeCodeDoccit
+docker compose up --build
+```
+
+Open:
+- Web UI: http://localhost:5000/
+- API: http://localhost:5000/api
+- MongoDB: mongodb://localhost:27017
+
+Environment variables (server):
+```
+PORT=5000
+DB_URI=mongodb://mongo:27017/doccit
+JWT_SECRET=replace_me
+JWT_EXPIRATION=1h
+```

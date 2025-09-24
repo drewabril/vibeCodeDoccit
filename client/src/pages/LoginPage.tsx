@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
+import React, { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
 const LoginPage: React.FC = () => {
-    const { login } = useContext(AuthContext);
+    const { login } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');

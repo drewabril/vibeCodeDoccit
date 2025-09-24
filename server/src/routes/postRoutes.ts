@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import {
   createPost,
-  getPost,
+  getPosts,
+  getPostById,
   updatePost,
   deletePost,
-  getPostsBySubreddit,
 } from '../controllers/postController';
 
 const router = Router();
@@ -13,7 +13,7 @@ const router = Router();
 router.post('/', createPost);
 
 // Route to get a specific post by ID
-router.get('/:id', getPost);
+router.get('/:id', getPostById);
 
 // Route to update a post by ID
 router.put('/:id', updatePost);
@@ -22,6 +22,6 @@ router.put('/:id', updatePost);
 router.delete('/:id', deletePost);
 
 // Route to get all posts for a specific subreddit
-router.get('/subreddit/:subredditId', getPostsBySubreddit);
+router.get('/', getPosts);
 
 export default router;

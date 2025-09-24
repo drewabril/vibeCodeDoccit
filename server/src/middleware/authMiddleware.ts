@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
-import { User } from '../models/User';
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import User from '../models/User';
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers['authorization']?.split(' ')[1];
@@ -9,23 +9,20 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
         return res.status(401).json({ message: 'No token provided' });
     }
 
-    jwt.verify(token, process.env.JWT_SECRET as string, async (err, decoded) => {
-        if (err) {
-            return res.status(403).json({ message: 'Failed to authenticate token' });
-        }
-
-        try {
-            const user = await User.findById(decoded.id);
-            if (!user) {
-                return res.status(404).json({ message: 'User not found' });
-            }
-
-            req.user = user;
-            next();
-        } catch (error) {
-            return res.status(500).json({ message: 'Internal server error' });
-        }
-    });
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
+        User.findById(decoded?.id)
+            .then(user => {
+                if (!user) {
+                    return res.status(404).json({ message: 'User not found' });
+                }
+                (req as any).user = user;
+                next();
+            })
+            .catch(() => res.status(500).json({ message: 'Internal server error' }));
+    } catch (err) {
+        return res.status(403).json({ message: 'Failed to authenticate token' });
+    }
 };
 
 export default authMiddleware;
